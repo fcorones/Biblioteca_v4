@@ -147,9 +147,15 @@ namespace API_v4.Controllers
 
 
         [HttpPost]
-        [Authorize(Roles = "ADMIN,USUARIO")]
+        [AllowAnonymous]
         public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
         {
+            bool usuarioExiste = await _context.Usuarios.AnyAsync(u => u.Email == usuario.Email);
+            if (usuarioExiste)
+            {
+                return Conflict("Ya existe un usuario con este email.");
+            }
+
             var rol = await _context.Roles.FirstOrDefaultAsync(r => r.Nombre == usuario.RolNombre);
             if (rol == null)
             {

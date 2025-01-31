@@ -222,10 +222,15 @@ namespace API_v4.Controllers
         [Authorize(Roles = "ADMIN,USUARIO")]
         public async Task<ActionResult<Prestamo>> PostPrestamo(Prestamo prestamo)
         {
+            // Validar que el préstamo no sea por más de 60 días
+            if ((prestamo.FechaDevolucion - prestamo.FechaPrestamo).TotalDays > 60)
+            {
+                return BadRequest("No se puede solicitar un préstamo por más de 60 días.");
+            }
+
             _context.Prestamos.Add(prestamo);
             await _context.SaveChangesAsync();
 
-            // Asegúrate de que el método GetPrestamo esté definido
             return CreatedAtAction("GetPrestamo", new { id = prestamo.Id }, prestamo);
         }
 
