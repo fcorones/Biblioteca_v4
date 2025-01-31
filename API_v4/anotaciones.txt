@@ -1,0 +1,36 @@
+﻿dentro de libro hay un sistema que permite el mapeo
+
+si te fijas en la clase libro, tenemos GenerosIds, EditorialId, AutorId, como debería ser una relacion de
+una BDD normal.
+pero que pasa?
+que si me manejo con los Ids asi nomas, y quisiera pasarle el mapeo de esos ids correspondientes con su nombre
+debería hacer un DTO que tenga NombreAutor, NombreEditorial, NombresGeneros
+
+pero yo no quiero hacer eso, yo quiero en uno solo mandarle todo
+entonces que hbago?
+mantengo los Ids porque asi es como EF se maneja en la relacion clase-BDD
+pero agrego campos no mapeados [NotMapped] que evita que se coloquen en la bdd
+entonces en lugar de hacer un DTO, lo manejo dentro de la misma clase
+
+eso tambien va a servir para el Rol del usuario.
+
+30-12
+habria que añadir autenticacion basada en roles en la API
+osea, que si al endpoint /Libros le llega rol: ADMIN || USER que lo acepte
+pero si a Usuarios llega rol "USER" que lo niegue
+
+17-01.
+en teoria federico no revisa el codigo
+pero habria que ponerle la mayor cantidad de verificaciones posibles a todo
+tanto a la api como al winform
+que no pongas numeros en donde van letras, etc
+
+LOGIN:
+juanpablo@hotmail.com
+miContraseñaSegura123
+
+
+26-01
+agregue [JsonIgnore] al campo ContraseñaHasheada. pero si hago eso no puedo postear contraseña
+quizas un nuevo endpoint /register? pero eso es para los usuarios. 
+para que se registren ahi ya con el rol de user defautl
