@@ -25,7 +25,6 @@ namespace API_v4.Controllers
             _context = context;
         }
 
-        //GPT
 
         //ESTE ANDA
         [HttpGet]
@@ -33,7 +32,7 @@ namespace API_v4.Controllers
         public async Task<ActionResult<IEnumerable<object>>> GetLibro()
         {
             var libros = await _context.Libros
-                .Include(l => l.Generos)
+                .Include(l => l.Generos)        //Carga los géneros asociados a cada libro
                 .Include(l => l.Autor)
                 .Include(l => l.Editorial)
                 .ToListAsync();
@@ -137,7 +136,7 @@ namespace API_v4.Controllers
                 return BadRequest("Algunos géneros no se encontraron en la base de datos.");
             }
 
-            libro.Generos = generos;
+            libro.Generos = generos; //EF mapea id_libro con id_genero en Libros_x_Genero
 
             // Guardar el libro en la base de datos
             _context.Libros.Add(libro);

@@ -24,16 +24,5 @@ namespace API_v4.Models
         [JsonIgnore]
         public Libro? Libro { get; set; }
 
-        /*
-        [NotMapped]                     los saco porque no quiero insertar por nombre, que pasa si tiene mismo nombre?
-        public string? NombreUsuario { get; set; }  lo mismo para el usuario, que pasa si existen 2 raul garcía?
-
-        [NotMapped]
-        public string? NombreLibro { get; set; }
-
-        [NotMapped]
-        public string? NombreLibroEspaniol { get; set; }
-        */
-
     }
 }

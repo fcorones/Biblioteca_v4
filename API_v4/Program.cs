@@ -61,14 +61,16 @@ builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSet
 // Agregar autenticación con JWT
 builder.Services.AddAuthentication(options =>
 {
+    //Define esquema de Auth del usuario
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    //Define esquema no Auth del usuario
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
     var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
     options.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidateIssuer = true,
+        ValidateIssuer = true,          //Parámetros para validar el token JWT
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
@@ -78,7 +80,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<TokenService>(); //Registra el servicio TokenService
 
 // Configurar CORS
 builder.Services.AddCors(options =>
@@ -106,8 +108,8 @@ app.UseHttpsRedirection();
 // Usar CORS
 app.UseCors("AllowSpecificOrigin");
 
-app.UseAuthentication(); // Asegúrate de que UseAuthentication esté antes de UseAuthorization
-app.UseAuthorization();
+app.UseAuthentication(); //Valida el token JWT con los parámetros de TokenValidationParameters
+app.UseAuthorization(); //Extrae el rol del token y chequea los permisos
 
 app.MapControllers();
 

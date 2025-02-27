@@ -62,7 +62,7 @@ namespace API_v4.Context
             base.OnModelCreating(modelBuilder);
         }
 
-        // Constructor con opciones
+        
         public BibliotecaDbContext(DbContextOptions<BibliotecaDbContext> options)
             : base(options)
         {

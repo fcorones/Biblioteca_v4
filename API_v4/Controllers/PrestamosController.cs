@@ -24,28 +24,7 @@ namespace API_v4.Controllers
             _context = context;
         }
 
-        /*
-        // GET: api/Prestamos
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Prestamo>>> GetPrestamos()
-        {
-            return await _context.Prestamos.ToListAsync();
-        }
-
-        // GET: api/Prestamos/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Prestamo>> GetPrestamo(int id)
-        {
-            var prestamo = await _context.Prestamos.FindAsync(id);
-
-            if (prestamo == null)
-            {
-                return NotFound();
-            }
-
-            return prestamo;
-        }
-        */
+       
 
         [HttpGet]
         [Authorize(Roles = "ADMIN,USUARIO")]
@@ -74,37 +53,7 @@ namespace API_v4.Controllers
             return Ok(prestamos);
         }
 
-        /*
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Prestamo>> GetPrestamo(int id)
-        {
-            // Incluir las relaciones con Usuario y Libro en la consulta
-            var prestamo = await _context.Prestamos
-                .Include(p => p.Usuario)  // Cargar el Usuario relacionado
-                .Include(p => p.Libro)    // Cargar el Libro relacionado
-                .FirstOrDefaultAsync(p => p.Id == id);  // Buscar el préstamo por ID
-
-            if (prestamo == null)
-            {
-                return NotFound();
-            }
-
-            // Devolver el préstamo con la información adicional de Usuario y Libro
-            return Ok(new
-            {
-                prestamo.Id,
-                prestamo.FechaPrestamo,
-                prestamo.FechaDevolucion,
-                prestamo.Activo,
-                Eliminado = prestamo.Eliminado,
-                UsuarioId = prestamo.UsuarioId,
-                UsuarioNombre = prestamo.Usuario?.Nombre, // Nombre del usuario (si existe)
-                LibroId = prestamo.LibroId,
-                LibroTitulo = prestamo.Libro?.Titulo,     // Título del libro (si existe)
-                LibroEditorial = prestamo.Libro?.Editorial.NombreEditorial // Nombre de la editorial
-            });
-        }
-        */
+        
 
         [HttpGet("{id}")]
         [Authorize(Roles = "ADMIN,USUARIO")] // Requiere autenticación //OJO CAPAZ QUE ES ALLOWANONYMOUS
@@ -205,18 +154,7 @@ namespace API_v4.Controllers
 
             return NoContent();
         }
-        /*
-        // POST: api/Prestamos
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Prestamo>> PostPrestamo(Prestamo prestamo)
-        {
-            _context.Prestamos.Add(prestamo);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPrestamo", new { id = prestamo.Id }, prestamo);
-        }
-        */
+       
 
         [HttpPost]
         [Authorize(Roles = "ADMIN,USUARIO")]
