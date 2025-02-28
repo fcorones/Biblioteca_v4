@@ -46,7 +46,7 @@ namespace API_v4.Controllers
                     FechaPrestamo = p.FechaPrestamo,
                     FechaDevolucion = p.FechaDevolucion,
                     Eliminado = p.Eliminado,
-                    Activo = p.Activo
+                    Estado = p.Estado
                 })
                 .ToListAsync();
 
@@ -84,7 +84,7 @@ namespace API_v4.Controllers
                     prestamo.Id,
                     prestamo.FechaPrestamo,
                     prestamo.FechaDevolucion,
-                    prestamo.Activo,
+                    Estado = prestamo.Estado,
                     Eliminado = prestamo.Eliminado,
                     UsuarioId = prestamo.UsuarioId,
                     UsuarioNombre = prestamo.Usuario?.Nombre, // Nombre del usuario (si existe)
@@ -103,7 +103,7 @@ namespace API_v4.Controllers
                         prestamo.Id,
                         prestamo.FechaPrestamo,
                         prestamo.FechaDevolucion,
-                        prestamo.Activo,
+                        Estado = prestamo.Estado,
                         UsuarioId = prestamo.UsuarioId,
                         UsuarioNombre = prestamo.Usuario?.Nombre, // Nombre del usuario (si existe)
                         LibroId = prestamo.LibroId,

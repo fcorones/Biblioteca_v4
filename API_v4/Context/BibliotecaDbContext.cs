@@ -46,13 +46,11 @@ namespace API_v4.Context
                 .WithMany(u => u.Prestamos)
                 .HasForeignKey(p => p.UsuarioId);
 
-            /*  // Relación 1-1: Libros - Préstamos
-              modelBuilder.Entity<Prestamo>()
-                  .HasOne(p => p.Libro)
-                  .WithOne(l => l.Prestamo)
-                  .HasForeignKey<Prestamo>(p => p.LibroId);
-            esto es con [JsonIgnore public Prestamo? Prestamo { get; set; }
-            */
+            modelBuilder.Entity<Prestamo>()
+                .Property(p => p.Estado)
+                .HasConversion<int>(); // Mapea el enum a int en la BDD
+
+
             // RELACIÓN 1-N LIBROS - PRESTAMOS
             modelBuilder.Entity<Prestamo>()
                 .HasOne(p => p.Libro)
